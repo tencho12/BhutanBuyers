@@ -1,0 +1,19 @@
+<div class="row mt-5">
+  <div class="col-md-4 mb-3" *ngFor="let product of products">
+    <div class="card text-center">
+      <div class="card-body">
+        <img src="#" width="100px" height="130px"/>
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="card-text">{{product.description }}</p>
+        <!-- <form>  -->
+          <!-- <input type="hidden" value="{{product.product_id}}"> -->
+        <a class="btn btn-primary" (click)="addToCart(product.product_id)">Add to Cart</a>
+        <!-- </form> -->
+      </div>
+      <div class="card-footer text-muted">
+        Nu. {{product.price}}<br>
+        size: {{product.size}}
+      </div>
+    </div>
+  </div>
+</div>

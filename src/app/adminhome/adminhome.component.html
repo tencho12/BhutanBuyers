@@ -1,0 +1,25 @@
+<h2>Orders</h2>
+<h5>Orders will be displayed here</h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Order id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Size</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let order of Orders">
+        <tr>
+            <th scope="row">{{order.order_id}}</th>
+            <td>{{order.name}}</td>
+            <td>{{order.description}}</td>
+            <td>{{order.price}}</td>
+            <td>{{order.price}}</td>
+            <td>{{order.size}}</td>
+            <td><Button class="btn btn-success btn-sm" (click)="approve(order.order_id)">approve</Button></td>
+        </tr>
+    </tbody>
+</table>
