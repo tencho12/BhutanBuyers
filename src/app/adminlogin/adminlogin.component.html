@@ -5,19 +5,44 @@
         <h3 class="mb-0">Admin Login</h3>
       </div>
       <div class="card-body">
-        <form class="form">
+        <form [formGroup]="myForm">
+          {{ myForm.value | json}}
+          <hr>
           <div class="form-group">
-            <label for="">Email</label>
-            <input [(ngModel)]="loginAdminData.email" name="email" type="text" class="form-control rounded-0" required>
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <input type="text" formControlName="email" class="form-control" placeholder="email">
+            <div class="alert alert-danger" role="alert" *ngIf="email.invalid && email.touched">
+              Your email doesnt look right!
+            </div>
           </div>
+          
           <div class="form-group">
-            <label for="">Password</label>
-            <input [(ngModel)]="loginAdminData.password" name="password" type="password" class="form-control rounded-0"
-              required>
+            <label for="password" class="col-sm-4 col-form-label">Password</label>
+            <input type="password" formControlName="password" class="form-control" placeholder="password">
+            <div class="alert alert-danger" role="alert" *ngIf="password.invalid && password.touched">
+              your password sucks
+            </div>
           </div>
-          <button (click)="loginAdmin()" class="btn btn-success float-right">Login</button>
+            <div class="form-group">
+              <button class="form-control btn btn-primary" (click)="loginAdmin()">Login</button>
+            </div>
         </form>
+
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- <form class="form">
+  <div class="form-group">
+    <label for="">Email</label>
+    <input [(ngModel)]="loginAdminData.email" name="email" type="text" class="form-control rounded-0" required>
+  </div>
+  <div class="form-group">
+    <label for="">Password</label>
+    <input [(ngModel)]="loginAdminData.password" name="password" type="password" class="form-control rounded-0"
+      required>
+  </div>
+  <button (click)="loginAdmin()" class="btn btn-success float-right">Login</button>
+</form> -->

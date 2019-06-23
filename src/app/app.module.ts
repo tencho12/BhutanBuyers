@@ -21,6 +21,8 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ManageProductsComponent } from './manage-products/manage-products.component'
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +41,8 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, AuthGuard, EventService,
     {

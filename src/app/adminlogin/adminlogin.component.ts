@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 //my imports
 import { Router } from '@angular/router'
 import { AuthAdminService } from "../auth-admin.service";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms' 
+
 
 @Component({
   selector: 'app-adminlogin',
@@ -11,17 +13,39 @@ import { AuthAdminService } from "../auth-admin.service";
 export class AdminloginComponent implements OnInit {
 
   loginAdminData = {}
+  myForm: FormGroup;
 
   constructor(
     private _auth: AuthAdminService,
-    private _router: Router
+    private _router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.myForm = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.email
+      ]],
+      password: ['', [
+        Validators.required
+        // Validators.pattern('') put patter of the password if any
+      ]],
+    })
+  }
+
+  get email() {
+    return this.myForm.get('email')
+  }
+
+  get password() {
+    return this.myForm.get('password')
   }
 
   loginAdmin() {
-    // console.log(this.loginUserData)
+    this.loginAdminData['email'] = this.myForm.controls.email.value;
+    this.loginAdminData['password'] = this.myForm.controls.password.value;
+    //  console.log(this.loginAdminData)
     this._auth.loginAdmin(this.loginAdminData)
       .subscribe(
         res => {
