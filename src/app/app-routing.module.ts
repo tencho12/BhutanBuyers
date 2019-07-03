@@ -14,7 +14,7 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'events',
+    redirectTo: 'allproducts',
     pathMatch:'full'
   },
   {
@@ -23,11 +23,11 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
     path: 'register',
-    component:RegisterComponent
+    loadChildren:() => import('./register/register.module').then(m => m.RegisterModule)
   },
   {
     path: 'mycart',

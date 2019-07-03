@@ -5,18 +5,25 @@
         <h3 class="mb-0">Login</h3>
       </div>
       <div class="card-body">
-        <form class="form">
-          <div class="form-group">
-            <label for="">Email</label>
-            <input [(ngModel)]="loginUserData.email" name="email" type="text" class="form-control rounded-0"
-              required>
+        <form class="form" [formGroup]="loginForm">
+        <div class="form-group">
+          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <input type="text" formControlName="email" class="form-control" placeholder="email">
+          <div class="alert alert-danger" role="alert" *ngIf="email.invalid && email.touched">
+            Your email doesnt look right!
           </div>
-          <div class="form-group">
-            <label for="">Password</label>
-            <input [(ngModel)]="loginUserData.password" name="password" type="password"
-              class="form-control rounded-0" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password" class="col-sm-4 col-form-label">Password</label>
+          <input type="password" formControlName="password" class="form-control" placeholder="password">
+          <div class="alert alert-danger" role="alert" *ngIf="password.invalid && password.touched">
+            your password sucks
           </div>
-          <button (click)="loginUser()" class="btn btn-success float-right">Login</button>
+        </div>
+        <div class="form-group">
+          <button class="form-control btn btn-primary" (click)="loginUser()">Login</button>
+        </div>
         </form>
       </div>
     </div>
