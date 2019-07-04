@@ -14,7 +14,7 @@
         <tr>
             <td>{{ product.name }}</td>
             <td>Nu. 500</td>
-            <td><Button class="btn btn-link" data-toggle="modal" data-target="#editModal">Edit other
+            <td><Button class="btn btn-link" data-toggle="modal" data-target="#newProductModal" (click)="editProduct(product.product_id)">Edit other
                     Details</Button>&nbsp;
                 <button class="btn btn-sm btn-danger" (click)="removeproduct(product.product_id)">Remove</button>
             </td>
@@ -30,7 +30,7 @@
         <div class="modal-content">
             <form [formGroup]="addProductForm">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addProductLabel">Add new product</h5>
+                    <h5 class="modal-title" >Add new product</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label>Product Name</label>
-                        <input formControlName="name" class="form-control rounded-0" required>
+                        <input formControlName="name" class="form-control rounded-0" required >
                     </div>
                     <div class="form-group">
                         <label>Description</label>
@@ -78,12 +78,11 @@
 </div>
 
 <!-- edit product Modal -->
-
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editProductLabel" aria-hidden="true"
+<!-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editProductLabel" aria-hidden="true"
     *ngFor="let product of products">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form>
+            <form [formGroup]="addProductForm">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addProductLabel">Edit product Detail</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -133,4 +132,4 @@
             </form>
         </div>
     </div>
-</div>
+</div> -->

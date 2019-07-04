@@ -8,13 +8,14 @@ export class EventService {
 
   eventData={}
 
-  private _eventsUrl = "http://localhost:3000/getProducts"
+  private productUrl = "http://localhost:3000/getProducts"
   private _specialEventsUrl = "http://localhost:3000/special";
   private _addtocartUrl = "http://localhost:3000/addToCart"
   private _showcartUrl = "http://localhost:3000/getCartItem"
   private _placeOrderUrl = "http://localhost:3000/placeOrder"
   private _removeOrderUrl = "http://localhost:3000/removeOrder"
-  private _removeProductUrl = "http://localhost:3000/removeProduct"
+  private _removeProductUrl = "http://localhost:3000/removeProduct";
+  private _getProductUrl ="http://localhost:3000/getProduct"
 
 
   
@@ -23,7 +24,7 @@ export class EventService {
   constructor(private http: HttpClient) { }
   
   getProducts() {
-    return this.http.get<any>(this._eventsUrl)
+    return this.http.get<any>(this.productUrl)
   }
 
   getSpecialEvents() {
@@ -52,5 +53,10 @@ export class EventService {
   removeProduct(product_id) {
     const product = { 'product_id': product_id }
     return this.http.post<any>(this._removeProductUrl, product)
+  }
+
+  getProduct(product_id) {
+    const proid = { 'product_id': product_id };
+    return this.http.post<any>(this._getProductUrl, proid);
   }
 }

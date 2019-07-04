@@ -17,6 +17,7 @@ export class ManageProductsComponent implements OnInit {
   products = []
   productDetail = {}
   selectedFile: File;
+  oneProduct:any;
   // percentDone: number;
   // uploadSuccess: boolean;
 
@@ -48,14 +49,17 @@ export class ManageProductsComponent implements OnInit {
       size: [this.size, [Validators.required]],
       image:[this.selectedFile]
     });
+    this.getProducts();
+  }
 
-
+  getProducts() { 
     this._eventService.getProducts()
       .subscribe(
         res => this.products = res,
         err => console.log(err)
-      )
+      );
   }
+
   addProduct() {
     console.log(this.addProductForm.value)
     this._authAdmin.addProduct(this.addProductForm.value)
@@ -70,7 +74,7 @@ export class ManageProductsComponent implements OnInit {
   onFileSelected(event) {
     this.selectedFile = event.target.files[0]
     // this.productDetail['image']=event.target.files[0]
-    console.log(this.selectedFile)
+    //console.log(this.selectedFile)
   }
   removeproduct(product_id) {
     this._eventService.removeProduct(product_id)
@@ -78,5 +82,25 @@ export class ManageProductsComponent implements OnInit {
         res => this._route.navigate(['/allproducts']),
         err => console.log(err)
       )
+  }
+
+  editProduct(product_id) {
+    this._eventService.getProduct(product_id)
+      .subscribe(
+        res => {
+          this.oneProduct = res;
+          console.log(this.oneProduct)
+          this.addProductForm.patchValue({
+            name: this.oneProduct[0].name,
+            description: this.oneProduct[0].description,
+            price: this.oneProduct[0].price,
+            category_id: this.oneProduct[0].category,
+            size: this.oneProduct[0].size,
+            image:this.oneProduct[0].image
+          })
+        },
+        err => console.log(err)
+      )
+    console.log(product_id);
   }
 }

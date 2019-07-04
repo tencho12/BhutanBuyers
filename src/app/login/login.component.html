@@ -7,7 +7,7 @@
       <div class="card-body">
         <form class="form" [formGroup]="loginForm">
         <div class="form-group">
-          <label for="email" class="col-sm-2 col-form-label">Email</label>
+          <label for="email" class="col-sm-3 col-form-label">Email</label>
           <input type="text" formControlName="email" class="form-control" placeholder="email">
           <div class="alert alert-danger" role="alert" *ngIf="email.invalid && email.touched">
             Your email doesnt look right!
