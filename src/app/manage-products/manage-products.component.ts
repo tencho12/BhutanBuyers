@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthAdminService } from '../auth-admin.service'
 import { EventService } from '../event.service'
 import { Router } from '@angular/router'
+import { FormGroup, FormBuilder, Validators} from '@angular/forms'
 
 
 
@@ -15,16 +16,40 @@ export class ManageProductsComponent implements OnInit {
 
   products = []
   productDetail = {}
-  selectedFile:File
+  selectedFile: File;
+  // percentDone: number;
+  // uploadSuccess: boolean;
+
+  category: any = [
+    { id: 1, name: 'clothing' },
+    { id: 2, name: 'laptops' },
+    { id: 3, name: 'phones' },
+    { id: 4, name: 'electronics' }
+  ];
   
+  size: any = ['small', 'medium', 'large'];
+  
+  addProductForm: FormGroup;
   constructor(
     private _authAdmin: AuthAdminService,
     private _eventService: EventService,
-    private _route: Router  
+    private _route: Router,
+    private fb: FormBuilder,
+    private _router:Router
 
   ) { }
 
   ngOnInit() {
+    this.addProductForm = this.fb.group({
+      name: ['', [Validators.required]],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      category_id: [this.category,[Validators.required]],
+      size: [this.size, [Validators.required]],
+      image:[this.selectedFile]
+    });
+
+
     this._eventService.getProducts()
       .subscribe(
         res => this.products = res,
@@ -32,10 +57,12 @@ export class ManageProductsComponent implements OnInit {
       )
   }
   addProduct() {
-    // console.log(this.registerUserData)
-    this._authAdmin.addProduct(this.productDetail)
+    console.log(this.addProductForm.value)
+    this._authAdmin.addProduct(this.addProductForm.value)
       .subscribe(
-        res => console.log(res),
+        res => {
+          this._router.navigate(['/allproducts'])
+        },
         err => console.log(err)
       )
   }

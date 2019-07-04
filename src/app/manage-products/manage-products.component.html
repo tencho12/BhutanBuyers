@@ -1,145 +1,136 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#newProductModal">
-  Add new Product
+    Add new Product
 </button>
 <table class="table mt-4">
-  <thead>
-    <tr>
-      <th scope="col">product name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody *ngFor="let product of products">
-    <tr>
-      <td>{{ product.name }}</td>
-      <td>Nu. 500</td>
-      <td><Button class="btn btn-link" data-toggle="modal" data-target="#editModal">Edit other Details</Button>&nbsp;
-        <button class="btn btn-sm btn-danger" (click)="removeproduct(product.product_id)">Remove</button>
-      </td>
-    </tr>
+    <thead>
+        <tr>
+            <th scope="col">product name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let product of products">
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>Nu. 500</td>
+            <td><Button class="btn btn-link" data-toggle="modal" data-target="#editModal">Edit other
+                    Details</Button>&nbsp;
+                <button class="btn btn-sm btn-danger" (click)="removeproduct(product.product_id)">Remove</button>
+            </td>
+        </tr>
 
-  </tbody>
+    </tbody>
 </table>
 
 <!-- add product Modal -->
 <div class="modal fade" id="newProductModal" tabindex="-1" role="dialog" aria-labelledby="newProductLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h5 class="modal-title" id="addProductLabel">Add new product</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form [formGroup]="addProductForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductLabel">Add new product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-          <div class="form-group">
-            <label>Product Name</label>
-            <input [(ngModel)]="productDetail.name" name="name" type="text" class="form-control rounded-0" required>
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <input [(ngModel)]="productDetail.description" name="description" type="text" class="form-control rounded-0"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Price</label>
-            <input [(ngModel)]="productDetail.price" name="price" type="number" class="form-control rounded-0" required>
-          </div>
-          <div class="form-group">
-            <label>Category</label>
-            <!-- <input [(ngModel)]="productDetail.size" name="size" type="text" class="form-control rounded-0" required> -->
-            <select name="category_id" [(ngModel)]="productDetail.category_id" class="form-control rounded-0">
-              <option value="1">Clothing</option>
-              <option value="2">Laptops</option>
-              <option value="3">Phones</option>
-              <option value="4">Electronics</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Size</label>
-            <!-- <input [(ngModel)]="productDetail.size" name="size" type="text" class="form-control rounded-0" required> -->
-            <select name="size" [(ngModel)]="productDetail.size" class="form-control rounded-0">
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Product image</label>
-            <input [(ngModel)]="productDetail.image" name="image" type="file" (change)="onFileSelected($event)"
-              class="form-control rounded-0" required>
-          </div>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input formControlName="name" class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input formControlName="description" class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input formControlName="price" class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select formControlName="category_id" class="form-control rounded-0">
+                            <option *ngFor="let c of category" [ngValue]="c.id">{{ c.name }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Size</label>
+                        <select formControlName="size" class="form-control rounded-0">
+                            <option *ngFor="let s of size" [ngValue]="s">{{ s }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Product image</label>
+                        <input formControlName="image" type="file" (change)="onFileSelected($event)"
+                            class="form-control rounded-0" required>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button (click)="addProduct()" class="btn btn-success float-right">Add</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button (click)="addProduct()" class="btn btn-success float-right">Add</button>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
 
 <!-- edit product Modal -->
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editProductLabel" aria-hidden="true"
-  *ngFor="let product of products">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h5 class="modal-title" id="addProductLabel">Edit product Detail</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+    *ngFor="let product of products">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductLabel">Edit product Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
-          <div class="form-group">
-            <label>Product Name</label>
-            <input [(ngModel)]="productDetail.name" name="name" type="text" value="{{product.name}}"
-              class="form-control rounded-0" required>
-          </div>
-          <div class="form-group">
-            <label>Description</label>
-            <input [(ngModel)]="productDetail.description" name="description" type="text" class="form-control rounded-0"
-              required>
-          </div>
-          <div class="form-group">
-            <label>Price</label>
-            <input [(ngModel)]="productDetail.price" name="price" type="number" class="form-control rounded-0" required>
-          </div>
-          <div class="form-group">
-            <label>Category</label>
-            <!-- <input [(ngModel)]="productDetail.size" name="size" type="text" class="form-control rounded-0" required> -->
-            <select name="category_id" [(ngModel)]="productDetail.category_id" class="form-control rounded-0">
-              <option value="1">Shirt</option>
-              <option value="2">pants</option>
-              <option value="3">Jackets</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Size</label>
-            <!-- <input [(ngModel)]="productDetail.size" name="size" type="text" class="form-control rounded-0" required> -->
-            <select name="size" [(ngModel)]="productDetail.size" class="form-control rounded-0">
-              <option value="small">Small</option>
-              <option value="medium">Medium</option>
-              <option value="large">Large</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Product image</label>
-            <input [(ngModel)]="productDetail.image" name="image" type="file" class="form-control rounded-0" required>
-          </div>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input formControlName="name" value="{{product.name}}"
+                            class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input formControlName="description" type="text"
+                            class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input formControlName="price" type="number"
+                            class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select formControlName="category_id" class="form-control rounded-0">
+                            <option *ngFor="let c of Category" [ngValue]="c.id">{{ c.name }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Size</label>
+                        <select formControlName="size" class="form-control rounded-0">
+                            <option *ngFor="let s of size" [ngValue]=" s ">{{ s }}</option>
+                        </select>
+                    </div>
+                
+                    <div class="form-group">
+                        <label>Product image</label>
+                        <input formControlName="image" type="file" class="form-control rounded-0"
+                            required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button (click)="addProduct()" class="btn btn-success float-right">Add</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button (click)="addProduct()" class="btn btn-success float-right">Add</button>
-        </div>
-      </form>
     </div>
-  </div>
 </div>

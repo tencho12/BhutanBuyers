@@ -6,8 +6,6 @@
       </div>
       <div class="card-body">
         <form [formGroup]="myForm">
-          {{ myForm.value | json}}
-          <hr>
           <div class="form-group">
             <label for="email" class="col-sm-2 col-form-label">Email</label>
             <input type="text" formControlName="email" class="form-control" placeholder="email">
