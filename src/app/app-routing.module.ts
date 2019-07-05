@@ -47,7 +47,7 @@ const routes: Routes = [
   },
   {
     path: 'manageProducts',
-    component: ManageProductsComponent
+    loadChildren: () => import('./manage-products/manage-products.module').then(m => m.ManageProductsModule)
   }
 ];
 

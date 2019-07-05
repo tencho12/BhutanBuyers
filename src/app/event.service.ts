@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/internal/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,11 @@ export class EventService {
   private _removeOrderUrl = "http://localhost:3000/removeOrder"
   private _removeProductUrl = "http://localhost:3000/removeProduct";
   private _getProductUrl ="http://localhost:3000/getProduct"
-
-
-  
-  
   
   constructor(private http: HttpClient) { }
   
   getProducts() {
-    return this.http.get<any>(this.productUrl)
+    return this.http.get<any>(this.productUrl);
   }
 
   getSpecialEvents() {

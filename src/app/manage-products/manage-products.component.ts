@@ -2,20 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { AuthAdminService } from '../auth-admin.service'
 import { EventService } from '../event.service'
 import { Router } from '@angular/router'
-import { FormGroup, FormBuilder, Validators} from '@angular/forms'
-
-
+import { FormGroup, FormBuilder, Validators, NgModel} from '@angular/forms'
+import { MatDialog } from '@angular/material';
+import { EditProductComponent } from '../edit-product/edit-product.component';
 
 
 @Component({
   selector: 'app-manage-products',
   templateUrl: './manage-products.component.html',
-  styleUrls: ['./manage-products.component.css']
+  styleUrls: ['./manage-products.component.css'],
+  entryComponents: [EditProductComponent]
+
 })
+  
+
 export class ManageProductsComponent implements OnInit {
 
   products = []
-  productDetail = {}
+  productDetail: any;
   selectedFile: File;
   oneProduct:any;
   // percentDone: number;
@@ -36,23 +40,28 @@ export class ManageProductsComponent implements OnInit {
     private _eventService: EventService,
     private _route: Router,
     private fb: FormBuilder,
-    private _router:Router
+    private _router: Router,
+    public dialog: MatDialog
 
   ) { }
 
   ngOnInit() {
+    this.initilizeForm();
+    this.getProducts();
+  }
+
+  initilizeForm() {
     this.addProductForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      category_id: [this.category,[Validators.required]],
+      category_id: [this.category, [Validators.required]],
       size: [this.size, [Validators.required]],
-      image:[this.selectedFile]
+      image: [this.selectedFile]
     });
-    this.getProducts();
   }
 
-  getProducts() { 
+  getProducts() {
     this._eventService.getProducts()
       .subscribe(
         res => this.products = res,
@@ -61,14 +70,14 @@ export class ManageProductsComponent implements OnInit {
   }
 
   addProduct() {
-    console.log(this.addProductForm.value)
     this._authAdmin.addProduct(this.addProductForm.value)
       .subscribe(
         res => {
-          this._router.navigate(['/allproducts'])
+          console.log(res)
+          this.getProducts();
         },
         err => console.log(err)
-      )
+      );
   }
 
   onFileSelected(event) {
@@ -79,28 +88,47 @@ export class ManageProductsComponent implements OnInit {
   removeproduct(product_id) {
     this._eventService.removeProduct(product_id)
       .subscribe(
-        res => this._route.navigate(['/allproducts']),
+        res => this.getProducts(),
         err => console.log(err)
       )
   }
 
-  editProduct(product_id) {
-    this._eventService.getProduct(product_id)
-      .subscribe(
-        res => {
-          this.oneProduct = res;
-          console.log(this.oneProduct)
-          this.addProductForm.patchValue({
-            name: this.oneProduct[0].name,
-            description: this.oneProduct[0].description,
-            price: this.oneProduct[0].price,
-            category_id: this.oneProduct[0].category,
-            size: this.oneProduct[0].size,
-            image:this.oneProduct[0].image
-          })
-        },
-        err => console.log(err)
-      )
-    console.log(product_id);
+
+//material dialog
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditProductComponent, {  
+      data: {
+       productDetail :this.oneProduct
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.category_id) {
+        this._authAdmin.addProduct(result)
+          .subscribe(
+            res => {
+              this.getProducts();
+            },
+            err => console.log(err)
+          )
+      }
+    });
+  }
+
+  getProduct(productId) { 
+      if (productId) {
+      this._eventService.getProduct(productId)
+        .subscribe(
+          res => {
+            this.oneProduct = res;
+            // console.log(this.oneProduct);
+
+            this.openDialog();
+          },
+          err => console.log(err)
+        );
+    }
   }
 }
+
+

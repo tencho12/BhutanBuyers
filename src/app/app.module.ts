@@ -20,6 +20,10 @@ import { AdminhomeComponent } from './adminhome/adminhome.component';
 import { ManageProductsComponent } from './manage-products/manage-products.component'
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatDialogModule, MatButtonToggleModule, MatFormFieldModule} from '@angular/material';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { MaterialModule } from 'src/shared/material.module';
 
 
 @NgModule({
@@ -31,14 +35,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     CheckoutComponent,
     AdminloginComponent,
     AdminhomeComponent,
-    ManageProductsComponent
+
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule    
+
   ],
   providers: [AuthService, AuthGuard, EventService,
     {

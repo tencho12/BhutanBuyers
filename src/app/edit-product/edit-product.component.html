@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Add Product</h2>
+<div class="example-container" [formGroup]="productForm">
+    <mat-dialog-content>
+        <mat-form-field>
+            <input type="text" matInput  placeholder="product name..." formControlName="name">
+        </mat-form-field><br>
+        <mat-form-field>
+            <input type="text" matInput placeholder="description..." formControlName="description">
+        </mat-form-field><br>
+        <mat-form-field>
+            <input type="number" matInput placeholder="price..." formControlName="price">
+        </mat-form-field><br>
+        <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category_id">
+                <mat-option *ngFor="let c of category" [value]="c.id">
+                    {{c.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br>
+        <mat-form-field>
+            <mat-label>Size</mat-label>
+                <mat-select formControlName="size">
+                    <mat-option *ngFor="let s of size" [value]="s">
+                        {{s}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br>
+
+        <!-- <mat-form-field>
+        <button matInput mat-raised-button (click)="fileInput.click()">Choose File</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+        </mat-form-field> -->
+        
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button (click)="cancel()">Cancel</button>
+        <button mat-raised-button (click)="save()">Save</button>
+    </mat-dialog-actions>
+    
+
+</div>

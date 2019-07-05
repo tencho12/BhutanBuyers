@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 //my imports
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -24,26 +25,26 @@ export class AuthAdminService {
   ) { }
 
   loginAdmin(user) {
-    return this.http.post<any>(this._loginUrl, user)
+    return this.http.post<any>(this._loginUrl, user);
   }
   loggedInAdmin() {
-    return !!localStorage.getItem('admintoken')
+    return !!localStorage.getItem('admintoken');
     //if the token exist in the browser,it will return true else false
   }
 
   logoutAdmin() {
-    localStorage.removeItem('admintoken')
-    this._router.navigate(['/allproducts'])
+    localStorage.removeItem('admintoken');
+    this._router.navigate(['/allproducts']);
   }
 
   getToken() {
-    return localStorage.getItem('admintoken')
+    return localStorage.getItem('admintoken');
   }
 
   getOrders() {
-     return this.http.get<any>(this._ordersUrl)
+    return this.http.get<any>(this._ordersUrl);
   }
   addProduct(data) {
-    return this.http.post<any>(this._addProductUrl,data)
+    return this.http.post<any>(this._addProductUrl, data);
   }
 }
