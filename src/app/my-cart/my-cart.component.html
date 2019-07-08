@@ -26,8 +26,12 @@
 
       </tr>
     </tbody>
-    <button class="btn btn-primary" routerLink="/checkout">Checkout</button>
+    <button class="btn btn-primary" *ngIf="!noitem" routerLink="/checkout">Checkout</button>
+    <!-- <button class="btn btn-primary" *ngIf="noitem" routerLink="/checkout">No items in your cart!</button> -->
   </table>
+  <div class="alert alert-primary mt-2" *ngIf="noitem" role="alert">
+    No items in your cart!
+  </div>
   </div>
   <div class="col-md-4">
     

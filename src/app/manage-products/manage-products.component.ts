@@ -83,7 +83,7 @@ export class ManageProductsComponent implements OnInit {
   onFileSelected(event) {
     this.selectedFile = event.target.files[0]
     // this.productDetail['image']=event.target.files[0]
-    //console.log(this.selectedFile)
+    console.log(this.selectedFile)
   }
   removeproduct(product_id) {
     this._eventService.removeProduct(product_id)

@@ -16,8 +16,8 @@ export class AdminloginComponent implements OnInit {
   myForm: FormGroup;
 
   constructor(
-    private _auth: AuthAdminService,
-    private _router: Router,
+    private auth: AuthAdminService,
+    private router: Router,
     private fb: FormBuilder
   ) { }
 
@@ -46,11 +46,12 @@ export class AdminloginComponent implements OnInit {
     this.loginAdminData['email'] = this.myForm.controls.email.value;
     this.loginAdminData['password'] = this.myForm.controls.password.value;
     //  console.log(this.loginAdminData)
-    this._auth.loginAdmin(this.loginAdminData)
+    this.auth.loginAdmin(this.loginAdminData)
       .subscribe(
-        res => {
-          localStorage.setItem('admintoken', res.token)
-          this._router.navigate(['/adminhome'])
+        res => {debugger;
+          localStorage.setItem('admintoken', res.token);
+          this.auth.adminUsername = 'admin username';
+          this.router.navigate(['/adminhome']);
         },
         err => console.log(err)
       )

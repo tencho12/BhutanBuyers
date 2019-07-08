@@ -24,24 +24,24 @@ export class EventsComponent implements OnInit {
   ) { }
   
   ngOnInit() {
+    this.getProducts();
+    this.getuserDetail();
+  }
+
+  getProducts() {
     this._eventService.getProducts()
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(
         res => {
           this.products = res
         },
-        err=>console.log(err)
-    )
-    
-    this.getuserDetail();
+        err => console.log(err)
+      )
   }
   getuserDetail() {
     const token = localStorage.token;
     const decoded = jwt_decode(token)
     this.useremail = decoded.email;
-    // console.log("decoded:")
-    // console.log(decoded)
-
   }
   
   addToCart(product) {

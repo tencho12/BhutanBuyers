@@ -10,8 +10,10 @@ import {Router} from '@angular/router'
 })
 export class MyCartComponent implements OnInit {
 
-  cartItem = []
-  useremail={}  
+  cartItem = [];
+  useremail = {};
+  noitem: boolean = true;
+
   constructor(private _eventService: EventService,
     private _route:Router
   ) { }
@@ -23,7 +25,12 @@ export class MyCartComponent implements OnInit {
   getProductsInCart() {
     this._eventService.getProductsInCart(this.useremail)
       .subscribe(
-        res => this.cartItem = res,
+        res => {
+          this.cartItem = res
+          if (this.cartItem.length) {
+            this.noItemInCart()
+          }
+        },
         err => console.log(err)
       )
   }
@@ -38,6 +45,13 @@ export class MyCartComponent implements OnInit {
         res => this.getProductsInCart(),
         err => console.log(err)
       )
+  }
+
+  noItemInCart() {
+    this.noitem = false;
+    // setTimeout(() => {
+    //   this.noitem = false;
+    // });
   }
 
 }

@@ -3,6 +3,17 @@ import { EventService } from '../event.service'
 import jwt_decode from 'jwt-decode'
 import { Router } from '@angular/router'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+
+// export interface Product { 
+//   item: Array<Item>
+//   address: []
+// }
+
+// export interface Item { 
+//   cart_id: number,
+//   user_id: number
+// }
+
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -12,9 +23,10 @@ export class CheckoutComponent implements OnInit {
 
   useremail = {}
   checkOutItems = [];
-  num: number
-  count = 1;
+  num: number;
   sum: number = 0;
+  product = {};
+  success: boolean = false;
   
   addressForm:FormGroup
 
@@ -29,7 +41,6 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
 
     this.addressForm = this.fb.group({
-      name: ['', Validators.required],
       address: ['', Validators.required],
       dzongkhag:['',Validators.required]
     });
@@ -53,7 +64,6 @@ export class CheckoutComponent implements OnInit {
         err => console.log(err)
     )
     
-    
   }
 
   getTotel() {
@@ -66,11 +76,23 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder() {
-    this._eventService.placeOrder(this.checkOutItems)
+    this.product['item'] = this.checkOutItems;
+    this.product['address']=this.addressForm.value
+    // console.log(this.product)  
+
+    this._eventService.placeOrder(this.product)
       .subscribe(
-        res =>console.log(res),
+        res => {
+          // console.log(res),
+            this.orderSuccess();
+        },
         err => console.log(err)
       )
+  }
+
+  orderSuccess() {
+    this.success = true;
+    setTimeout(() => { this.success = false }, 2000);
   }
 
 }

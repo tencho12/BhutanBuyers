@@ -4,21 +4,19 @@
     <h4>Delivery Address</h4>
     <form class="form" [formGroup]="addressForm" >
       <div class="form-group">
-        <label for="">Name</label>
-        <input formControlName="name" type="text" placeholder="name..."
-          class="form-control rounded-0">
-      </div>
-      <div class="form-group">
-        <label for="">Address</label>
+        <label for="">Delivery Address</label>
         <input formControlName="address" type="text" placeholder="address...."
-          class="form-control rounded-0">
+          class="form-control rounded-0" required>
       </div>
       <div class="form-group">
         <label for="">Dzongkhang</label>
         <input formControlName="dzongkhag" type="text" placeholder="dzongkhag...."
-          class="form-control rounded-0">
+          class="form-control rounded-0" required>
       </div>
-      <button (click)="placeOrder()" class="btn btn-success">Place Order</button>
+      <button (click)="placeOrder()" class="btn btn-success" type="submit">Place Order</button>
+      <div class="alert alert-success" role="alert" *ngIf="success">
+        Order Successfully placed.
+      </div>
     </form>
   </div>
   <div class="col-md-4">
@@ -30,18 +28,21 @@
       <table class="table table-hover">
         <thead>
           <tr>
+            <th scope="col">SI No.</th>
             <th scope="col">Product</th>
             <th scope="col">Price</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of checkOutItems">
+        <tbody *ngFor="let item of checkOutItems let i = index">
           <tr>
+            <td>{{ i + 1 }}</td> 
             <td>{{item.name}}</td>
-            <td>Nu. {{item.price}}</td>
+            <td>Nu. {{item.price }}</td>
           </tr>
         </tbody>
+        
         <tr>
-          <td><b>Total Amount:</b></td>
+          <td colspan="2"><b>Total Amount:</b></td>
           <td><b>Nu. {{ sum }}</b></td>
         </tr>
       </table>

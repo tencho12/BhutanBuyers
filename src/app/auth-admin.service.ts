@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthAdminService {
 
-
+  username = '';
   private _ordersUrl = "http://localhost:3000/getorders"
   private _addProductUrl = "http://localhost:3000/addProduct";
   // private _addtocartUrl = "http://localhost:3000/addToCart"
@@ -46,5 +46,13 @@ export class AuthAdminService {
   }
   addProduct(data) {
     return this.http.post<any>(this._addProductUrl, data);
+  }
+
+  set adminUsername(value) { 
+    this.username = value;
+  }
+
+  get adminUsername() { 
+    return this.username;
   }
 }

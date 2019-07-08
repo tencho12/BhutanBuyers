@@ -14,6 +14,7 @@ export class EditProductComponent implements OnInit {
   // srcResult: File;
   // percentDone: number;
   // uploadSuccess: boolean;
+  selectedFile: File;
 
   category: any = [
     { id: 1, name: 'clothing' },
@@ -65,11 +66,13 @@ export class EditProductComponent implements OnInit {
   save() {
     // console.log(this.productForm.value)
     this.dialogRef.close(this.productForm.value);
+    console.log(this.productForm)
     //save the document
   }
 
   cancel() {
     this.dialogRef.close();
+    this.productForm.reset();
     //save the document
   }
   

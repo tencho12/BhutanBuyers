@@ -8,31 +8,31 @@
         <form class="form" [formGroup]="registerForm">
           <div class="form-group">
             <label for="">First name</label>
-            <input type="text" formControlName="first_name" class="form-control rounded-0" required value="{{ firstName }}">
+            <input type="text" formControlName="first_name" placeholder="first name.." class="form-control rounded-0" required value="{{ firstName }}">
           </div>
           <div class="form-group">
             <label for="">Last name</label>
-            <input formControlName="last_name" class="form-control rounded-0" required>
+            <input formControlName="last_name" placeholder="last name.." class="form-control rounded-0" required>
           </div>
           <div class="form-group">
             <label for="">Email</label>
-            <input formControlName="email" type="email" class="form-control rounded-0" required>
+            <input formControlName="email" type="email" placeholder="email..." class="form-control rounded-0" required>
           </div>
           <div class="form-group">
             <label for="">Password</label>
-            <input formControlName="password" type="password" class="form-control rounded-0" required>
+            <input formControlName="password" type="password" placeholder="password..." class="form-control rounded-0" required>
           </div>
           <div class="form-group">
             <label for="">Location</label>
-            <input formControlName="location" type="text" class="form-control rounded-0"
+            <input formControlName="location" type="text" placeholder="address" class="form-control rounded-0"
               required>
           </div>
           <div class="form-group">
             <label for="">Phone Number</label>
-            <input formControlName="phone_no" type="number" class="form-control rounded-0"
+            <input formControlName="phone_no" type="number" placeholder="phone number..." class="form-control rounded-0"
               required>
           </div>
-          <button (click)="registerUser()" class="btn btn-primary float-right">Register</button>
+          <button (click)="registerUser()" class="btn btn-primary float-right" [disabled]="registerForm.invalid">Register</button>
         </form>
       </div>
     </div>
