@@ -14,7 +14,7 @@
 
       </tr>
     </thead>
-    <tbody *ngFor="let item of cartItem">
+    <tbody *ngFor="let item of cartItem  ">
       <tr>
         
         <td>{{item.name}} </td>
@@ -22,7 +22,7 @@
         <td>{{item.price}}</td>
         <td>{{item.size}}</td>
         <td>{{item.order_date | date }}</td>
-        <td><button class="btn btn-sm btn-danger" (click)="removeFromCart(item.product_id)">Remove</button></td>
+        <td><button class="btn btn-sm btn-danger" (click)="removeFromCart(item.cart_id)">Remove</button></td>
 
       </tr>
     </tbody>

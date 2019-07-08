@@ -8,9 +8,13 @@
         <p class="card-text">{{product.description }}</p>
         <!-- <form>  -->
           <!-- <input type="hidden" value="{{product.product_id}}"> -->
-        <a class="btn btn-primary" (click)="addToCart(product.product_id)">Add to Cart</a>
+        <a class="btn btn-primary" (click)="addToCart(product)">Add to Cart</a>
         <!-- </form> -->
+        <div class="alert alert-success" role="alert" *ngIf="product.inCart">
+          Added to your cart!
+        </div>
       </div>
+      
       <div class="card-footer text-muted">
         Nu. {{product.price}}<br>
         size: {{product.size}}

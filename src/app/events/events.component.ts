@@ -16,6 +16,7 @@ export class EventsComponent implements OnInit {
   private unsubscribeAll: Subject<any> = new Subject;
   products=[]
   useremail: string
+  success: boolean = false;
   
   constructor(
     private _eventService: EventService,
@@ -33,25 +34,23 @@ export class EventsComponent implements OnInit {
     )
     
     this.getuserDetail();
-
-    // console.log(this.getuserDetail());
-    
   }
   getuserDetail() {
     const token = localStorage.token;
     const decoded = jwt_decode(token)
     this.useremail = decoded.email;
-    console.log("decoded:")
-    console.log(decoded)
+    // console.log("decoded:")
+    // console.log(decoded)
 
   }
   
-  addToCart(id: number) {
-    // console.log(this.useremail)
-    this._eventService.addTocart(this.useremail, id)
+  addToCart(product) {
+    this._eventService.addTocart(this.useremail, product.product_id)
       // .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(
-      res => console.log(res),
+        res => {
+          this.setSuccess(product);
+        },
       err => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
@@ -60,6 +59,10 @@ export class EventsComponent implements OnInit {
         }
       }
     )
+  }
+  setSuccess(product) {
+    product.inCart = true;
+    setTimeout(()=> { product.inCart=false }, 2000);
   }
   ngOnDestroy(): void {
     //Called once, before the instance is destroyed.

@@ -1,21 +1,22 @@
 <br />
 <div class="row">
   <div class="col-sm-6">
-    <form class="form">
+    <h4>Delivery Address</h4>
+    <form class="form" [formGroup]="addressForm" >
       <div class="form-group">
         <label for="">Name</label>
-        <input [(ngModel)]="userDetail.name" name="name" type="text" placeholder="name..."
-          class="form-control rounded-0" required>
+        <input formControlName="name" type="text" placeholder="name..."
+          class="form-control rounded-0">
       </div>
       <div class="form-group">
         <label for="">Address</label>
-        <input [(ngModel)]="userDetail.address" name="address" type="text" placeholder="address...."
-          class="form-control rounded-0" required>
+        <input formControlName="address" type="text" placeholder="address...."
+          class="form-control rounded-0">
       </div>
       <div class="form-group">
         <label for="">Dzongkhang</label>
-        <input [(ngModel)]="userDetail.dzongkhag" name="dzongkhag" type="text" placeholder="dzongkhag...."
-          class="form-control rounded-0" required>
+        <input formControlName="dzongkhag" type="text" placeholder="dzongkhag...."
+          class="form-control rounded-0">
       </div>
       <button (click)="placeOrder()" class="btn btn-success">Place Order</button>
     </form>
@@ -39,6 +40,10 @@
             <td>Nu. {{item.price}}</td>
           </tr>
         </tbody>
+        <tr>
+          <td><b>Total Amount:</b></td>
+          <td><b>Nu. {{ sum }}</b></td>
+        </tr>
       </table>
     </div>
   </div>

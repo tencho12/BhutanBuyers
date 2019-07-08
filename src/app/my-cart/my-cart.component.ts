@@ -17,20 +17,25 @@ export class MyCartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const token = localStorage.token;
-    const decoded = jwt_decode(token)
-    this.useremail['user_email'] = decoded.email
-
+    this.decodeToken();
+    this.getProductsInCart();
+  }
+  getProductsInCart() {
     this._eventService.getProductsInCart(this.useremail)
       .subscribe(
         res => this.cartItem = res,
         err => console.log(err)
       )
   }
-  removeFromCart(product_id) {
-    this._eventService.removeFromCart(product_id)
+  decodeToken() {
+    const token = localStorage.token;
+    const decoded = jwt_decode(token)
+    this.useremail['user_email'] = decoded.email
+  }
+  removeFromCart(cart_id) {
+    this._eventService.removeFromCart(cart_id)
       .subscribe(
-        res => this._route.navigate(['/allproducts']),
+        res => this.getProductsInCart(),
         err => console.log(err)
       )
   }

@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatDialogModule, MatButtonToggleModule, MatFormFieldModule} from '@angular/material';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { MaterialModule } from 'src/shared/material.module';
+import { PlaceOrderComponent } from './place-order/place-order.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MaterialModule } from 'src/shared/material.module';
     CheckoutComponent,
     AdminloginComponent,
     AdminhomeComponent,
+    PlaceOrderComponent,
 
   ],
   imports: [

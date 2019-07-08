@@ -37,13 +37,14 @@ export class EventService {
   getProductsInCart(user_email) {
     return this.http.post<any>(this._showcartUrl, user_email)
   }
-  placeOrder(userdetails) {
-    return this.http.post<any>(this._placeOrderUrl, userdetails)
+  placeOrder(checkOutItems) {
+    // console.log(checkOutItems)
+    return this.http.post<any>(this._placeOrderUrl, checkOutItems)
     
   }
 
-  removeFromCart(product_id) {
-    const product={'product_id':product_id}
+  removeFromCart(cart_id) {
+    const product = { 'cart_id': cart_id}
     return this.http.post<any>(this._removeOrderUrl, product)
     
   }
