@@ -21,7 +21,7 @@
         <td>{{item.description}}</td>
         <td>{{item.price}}</td>
         <td>{{item.size}}</td>
-        <td>{{item.order_date}}</td>
+        <td>{{item.order_date | date }}</td>
         <td><button class="btn btn-sm btn-danger" (click)="removeFromCart(item.product_id)">Remove</button></td>
 
       </tr>

@@ -6,9 +6,6 @@ import { Router } from '@angular/router'
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-
-
-
 @Component({
   selector: 'app-events',
   templateUrl: './events.component.html',
@@ -34,14 +31,23 @@ export class EventsComponent implements OnInit {
         },
         err=>console.log(err)
     )
+    
+    this.getuserDetail();
+
+    // console.log(this.getuserDetail());
+    
+  }
+  getuserDetail() {
     const token = localStorage.token;
     const decoded = jwt_decode(token)
     this.useremail = decoded.email;
-    
+    console.log("decoded:")
+    console.log(decoded)
+
   }
   
-  addToCart(id) {
-    console.log(this.useremail);
+  addToCart(id: number) {
+    // console.log(this.useremail)
     this._eventService.addTocart(this.useremail, id)
       // .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(
