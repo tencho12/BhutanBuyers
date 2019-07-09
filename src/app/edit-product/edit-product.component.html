@@ -29,10 +29,11 @@
         <label>Upload file</label>
         <input type="file" formControlName="image" (change)="onFileSelected($event)">
     </mat-dialog-content>
-    
+        <input type="hidden" formControlName="product_id">
     <mat-dialog-actions>
         <button mat-button (click)="cancel()">Cancel</button>
-        <button mat-raised-button (click)="save()">Save</button>
+        <button mat-raised-button (click)="save()">{{ data.edit?"Update":"save"}}</button>
+
     </mat-dialog-actions>
     
 

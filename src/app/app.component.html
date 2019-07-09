@@ -10,7 +10,8 @@
         <a routerLink="/allproducts" class="nav-link" routerLinkActive="active">Home</a>
       </li>
       <li class="nav-item">
-        <a routerLink="/mycart" class="nav-link" *ngIf="_authService.loggedIn()" routerLinkActive="active">Cart</a>
+        <a routerLink="/mycart" class="nav-link" *ngIf="!_authAdimService.loggedInAdmin()" routerLinkActive="active">Cart</a>
+        <!-- <a routerLink="/mycart" class="nav-link" *ngIf="_authService.loggedIn()" routerLinkActive="active">Cart</a> without authgard-->
       </li>
     </ul>
     <ul class="navbar-nav ">

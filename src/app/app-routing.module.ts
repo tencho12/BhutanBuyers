@@ -31,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'mycart',
-    component: MyCartComponent
+    component: MyCartComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'checkout',
@@ -47,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'manageProducts',
-    loadChildren: () => import('./manage-products/manage-products.module').then(m => m.ManageProductsModule)
+    loadChildren: () => import('./manage-products/manage-products.module').then(m => m.ManageProductsModule),
   }
 ];
 

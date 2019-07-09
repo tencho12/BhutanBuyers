@@ -30,7 +30,7 @@ export class EditProductComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.data.productDetail && this.data.productDetail[0].name)
+    //  console.log(this.data.productDetail)
     this.addProductForm();
     if (this.data.productDetail) {
       this.editProductForm();
@@ -39,6 +39,7 @@ export class EditProductComponent implements OnInit {
   }
   addProductForm() {
     this.productForm = this.fb.group({
+      product_id:[''],
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       price: ['', [Validators.required]],
@@ -50,12 +51,13 @@ export class EditProductComponent implements OnInit {
 
   editProductForm() {
     this.productForm.patchValue({
+      product_id: this.data.productDetail[0].product_id,
       name: this.data.productDetail[0].name,
       description: this.data.productDetail[0].description,
       price: this.data.productDetail[0].price,
       category_id: this.data.productDetail[0].category,
       size: this.data.productDetail[0].size,
-      // image: this.data.productDetail[0].image
+      image: [this.selectedFile]      
     })
   }
 
@@ -64,8 +66,10 @@ export class EditProductComponent implements OnInit {
   }
 
   save() {
+    // console.log(this.productForm.value)
     this.dialogRef.close(this.productForm.value);
-
+    // console.log(this.productForm)
+    //save the document
   }
 
   cancel() {

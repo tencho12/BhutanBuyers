@@ -3,21 +3,24 @@
 <table class="table">
     <thead>
         <tr>
+            <th scope="col">Si No.</th>
             <th scope="col">Order id</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
+            <th scope="col">User_id</th>
             <th scope="col">Size</th>
+            <th>Action</th>
         </tr>
     </thead>
-    <tbody *ngFor="let order of Orders">
+    <tbody *ngFor="let order of Orders  let i = index">
         <tr>
-            <th scope="row">{{order.order_id}}</th>
+            <td>{{ i+1 }}</td>
+            <td>{{order.order_id}}</td>
             <td>{{order.name}}</td>
             <td>{{order.description}}</td>
             <td>{{order.price}}</td>
-            <td>{{order.price}}</td>
+            <td>{{order.user_id}}</td>
             <td>{{order.size}}</td>
             <td><Button class="btn btn-success btn-sm" (click)="approve(order.order_id)">approve</Button></td>
         </tr>

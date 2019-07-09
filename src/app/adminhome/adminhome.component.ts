@@ -16,6 +16,10 @@ export class AdminhomeComponent implements OnInit {
   constructor(private _authAdmin: AuthAdminService) { }
 
   ngOnInit() {
+    this.getOrders();
+  }
+
+  getOrders() {
     this._authAdmin.getOrders()
       .subscribe(
         res => {

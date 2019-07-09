@@ -89,25 +89,33 @@ export class ManageProductsComponent implements OnInit {
       )
   }
 
-
 //material dialog
-  openDialog(): void {
+  openDialog(edit: boolean): void {
     const dialogRef = this.dialog.open(EditProductComponent, {  
       data: {
-       productDetail :this.oneProduct
+        productDetail: this.oneProduct,
+        edit: edit
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.category_id) {
-        console.log(result)
-        this._authAdmin.addProduct(result)
-          .subscribe(
-            res => {
-              this.getProducts();
-            },
-            err => console.log(err)
+        if (!edit) {
+          this._authAdmin.addProduct(result)
+            .subscribe(
+              res => {
+                this.getProducts();
+              },
+              err => console.log(err)
+            );
+        }
+        else {
+          this._eventService.updateproduct(result)
+            .subscribe(
+              res => this.getProducts(),
+              err => console.log(err)
           )
+        }
       }
     });
   }
@@ -118,9 +126,7 @@ export class ManageProductsComponent implements OnInit {
         .subscribe(
           res => {
             this.oneProduct = res;
-            // console.log(this.oneProduct);
-
-            this.openDialog();
+            this.openDialog(true);
           },
           err => console.log(err)
         );

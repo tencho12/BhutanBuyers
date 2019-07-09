@@ -16,7 +16,9 @@ export class EventService {
   private _placeOrderUrl = "http://localhost:3000/placeOrder"
   private _removeOrderUrl = "http://localhost:3000/removeOrder"
   private _removeProductUrl = "http://localhost:3000/removeProduct";
-  private _getProductUrl ="http://localhost:3000/getProduct"
+  private _getProductUrl = "http://localhost:3000/getProduct"
+  private updateproductUrl = "http://localhost:3000/updateproduct"
+  
   
   constructor(private http: HttpClient) { }
   
@@ -56,5 +58,9 @@ export class EventService {
   getProduct(product_id) {
     const proid = { 'product_id': product_id };
     return this.http.post<any>(this._getProductUrl, proid);
+  }
+
+  updateproduct(data) {
+    return this.http.post<any>(this.updateproductUrl, data);
   }
 }
