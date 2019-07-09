@@ -33,6 +33,7 @@ export class EventsComponent implements OnInit {
       .pipe(takeUntil(this.unsubscribeAll))
       .subscribe(
         res => {
+          console.log(res);
           this.products = res
         },
         err => console.log(err)

@@ -5,18 +5,15 @@
 
         <img src="#" width="100px" height="130px"/>
         <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">{{product.description }}</p>
-        <!-- <form>  -->
-          <!-- <input type="hidden" value="{{product.product_id}}"> -->
-        <a class="btn btn-primary" (click)="addToCart(product)">Add to Cart</a>
-        <!-- </form> -->
+        <p class="card-text">Nu. {{product.price }}</p>
+        <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
         <div class="alert alert-success" role="alert" *ngIf="product.inCart">
           Added to your cart!
         </div>
       </div>
       
       <div class="card-footer text-muted">
-        Nu. {{product.price}}<br>
+        {{product.description }}<br>
         size: {{product.size}}
       </div>
     </div>

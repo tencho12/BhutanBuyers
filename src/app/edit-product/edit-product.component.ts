@@ -11,9 +11,6 @@ export class EditProductComponent implements OnInit {
 
   productForm: FormGroup;
   formData:any;
-  // srcResult: File;
-  // percentDone: number;
-  // uploadSuccess: boolean;
   selectedFile: File;
 
   category: any = [
@@ -30,7 +27,6 @@ export class EditProductComponent implements OnInit {
     public dialogRef: MatDialogRef<EditProductComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    
   ) { }
 
   ngOnInit() {
@@ -39,7 +35,7 @@ export class EditProductComponent implements OnInit {
     if (this.data.productDetail) {
       this.editProductForm();
     }
-    console.log(this.data)
+    // console.log(this.data)
   }
   addProductForm() {
     this.productForm = this.fb.group({
@@ -48,7 +44,7 @@ export class EditProductComponent implements OnInit {
       price: ['', [Validators.required]],
       category_id: [this.category, [Validators.required]],
       size: [this.size, [Validators.required]],
-      // image: [this.srcResult]
+      image: [this.selectedFile]
     });
   }
 
@@ -61,13 +57,15 @@ export class EditProductComponent implements OnInit {
       size: this.data.productDetail[0].size,
       // image: this.data.productDetail[0].image
     })
-}
+  }
+
+  onFileSelected(event) {
+    this.selectedFile = event.target.files[0];
+  }
 
   save() {
-    // console.log(this.productForm.value)
     this.dialogRef.close(this.productForm.value);
-    console.log(this.productForm)
-    //save the document
+
   }
 
   cancel() {

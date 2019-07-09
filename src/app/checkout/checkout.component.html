@@ -8,12 +8,19 @@
         <input formControlName="address" type="text" placeholder="address...."
           class="form-control rounded-0" required>
       </div>
+      <div class="alert alert-danger" role="alert" *ngIf="address.invalid && address.touched">
+        please provide an address
+      </div>
       <div class="form-group">
         <label for="">Dzongkhang</label>
         <input formControlName="dzongkhag" type="text" placeholder="dzongkhag...."
           class="form-control rounded-0" required>
       </div>
-      <button (click)="placeOrder()" class="btn btn-success" type="submit">Place Order</button>
+      <div class="alert alert-danger" role="alert" *ngIf="dzongkhag.invalid && dzongkhag.touched">
+        please provide your Dzongkhang
+      </div>
+      
+      <button (click)="placeOrder()" class="btn btn-success" [disabled]="addressForm.invalid" type="submit">Place Order</button>
       <div class="alert alert-success" role="alert" *ngIf="success">
         Order Successfully placed.
       </div>

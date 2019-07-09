@@ -13,7 +13,7 @@
         <mat-form-field>
             <mat-label>Category</mat-label>
             <mat-select formControlName="category_id">
-                <mat-option *ngFor="let c of category" [value]="c.name">
+                <mat-option *ngFor="let c of category" [value]="c.id">
                     {{c.name}}
                 </mat-option>
             </mat-select>
@@ -26,17 +26,10 @@
                 </mat-option>
             </mat-select>
         </mat-form-field><br>
-
-        <!-- <mat-form-field>
-        <button matInput mat-raised-button (click)="fileInput.click()">Choose File</button>
-        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
-        </mat-form-field> -->
-        <!-- <input #imageInput
-         type="file"
-         accept="image/*"
-         (change)="onFileSelected(imageInput)"> -->
-        
+        <label>Upload file</label>
+        <input type="file" formControlName="image" (change)="onFileSelected($event)">
     </mat-dialog-content>
+    
     <mat-dialog-actions>
         <button mat-button (click)="cancel()">Cancel</button>
         <button mat-raised-button (click)="save()">Save</button>

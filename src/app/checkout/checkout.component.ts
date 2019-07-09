@@ -66,6 +66,14 @@ export class CheckoutComponent implements OnInit {
     
   }
 
+  get address() {
+    return this.addressForm.get('address')
+  }
+
+  get dzongkhag() {
+    return this.addressForm.get('dzongkhag')
+  }
+
   getTotel() {
     let summ = 0;
     this.checkOutItems.forEach((element) => {

@@ -80,11 +80,7 @@ export class ManageProductsComponent implements OnInit {
       );
   }
 
-  onFileSelected(event) {
-    this.selectedFile = event.target.files[0]
-    // this.productDetail['image']=event.target.files[0]
-    console.log(this.selectedFile)
-  }
+ 
   removeproduct(product_id) {
     this._eventService.removeProduct(product_id)
       .subscribe(
@@ -104,6 +100,7 @@ export class ManageProductsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.category_id) {
+        console.log(result)
         this._authAdmin.addProduct(result)
           .subscribe(
             res => {

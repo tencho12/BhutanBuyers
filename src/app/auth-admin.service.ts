@@ -11,8 +11,8 @@ import { Observable } from 'rxjs';
 export class AuthAdminService {
 
   username = '';
-  private _ordersUrl = "http://localhost:3000/getorders"
-  private _addProductUrl = "http://localhost:3000/addProduct";
+  private ordersUrl = "http://localhost:3000/getorders"
+  private addProductUrl = "http://localhost:3000/addProduct";
   // private _addtocartUrl = "http://localhost:3000/addToCart"
   // private _showcartUrl = "http://localhost:3000/getCartItem"
 
@@ -42,10 +42,11 @@ export class AuthAdminService {
   }
 
   getOrders() {
-    return this.http.get<any>(this._ordersUrl);
+    debugger;
+    return this.http.get<any>(this.ordersUrl);
   }
   addProduct(data) {
-    return this.http.post<any>(this._addProductUrl, data);
+    return this.http.post<any>(this.addProductUrl, data);
   }
 
   set adminUsername(value) { 

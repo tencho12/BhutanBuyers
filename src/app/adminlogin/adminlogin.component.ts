@@ -48,9 +48,9 @@ export class AdminloginComponent implements OnInit {
     //  console.log(this.loginAdminData)
     this.auth.loginAdmin(this.loginAdminData)
       .subscribe(
-        res => {debugger;
+        res => {
           localStorage.setItem('admintoken', res.token);
-          this.auth.adminUsername = 'admin username';
+          // this.auth.adminUsername = 'admin username';
           this.router.navigate(['/adminhome']);
         },
         err => console.log(err)

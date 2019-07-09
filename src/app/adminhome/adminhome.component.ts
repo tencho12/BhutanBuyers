@@ -18,7 +18,10 @@ export class AdminhomeComponent implements OnInit {
   ngOnInit() {
     this._authAdmin.getOrders()
       .subscribe(
-        res => this.Orders = res,
+        res => {
+          console.log(res)
+          this.Orders = res
+        },
         err => console.log(err)
       )
 
