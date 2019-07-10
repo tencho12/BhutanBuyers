@@ -5,7 +5,7 @@
 
         <img src="../../assets/images/nike.webp"  width="150px" height="150px" class="rounded"/>
         <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">Nu. {{product.price }}</p>
+        <p class="card-text"><b>Nu. {{product.price }}</b></p>
         <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
         <div class="alert alert-success" role="alert" *ngIf="product.inCart">
           Added to your cart!

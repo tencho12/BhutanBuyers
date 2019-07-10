@@ -17,14 +17,10 @@ import { MyCartComponent } from './my-cart/my-cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { AdminhomeComponent } from './adminhome/adminhome.component';
-import { ManageProductsComponent } from './manage-products/manage-products.component'
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatDialogModule, MatButtonToggleModule, MatFormFieldModule} from '@angular/material';
-import { EditProductComponent } from './edit-product/edit-product.component';
 import { MaterialModule } from 'src/shared/material.module';
-import { PlaceOrderComponent } from './place-order/place-order.component';
 
 
 @NgModule({
@@ -36,7 +32,6 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
     CheckoutComponent,
     AdminloginComponent,
     AdminhomeComponent,
-    PlaceOrderComponent,
 
   ],
   imports: [

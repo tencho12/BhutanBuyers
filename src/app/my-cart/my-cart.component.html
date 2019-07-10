@@ -1,16 +1,16 @@
 <br>
-<h2>Products in your cart</h2>
+<h3>Products in your cart</h3>
 <div class="row mt-5">
-  <div class="col-md-8">
+  <div class="col-md-10">
   <table class="table table-hover">
     <thead>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Price</th>
-        <th scope="col">Size</th>
-        <th scope="col">Order Date</th>
-        <th scope="col">Action</th>
+        <th>Name</th>
+        <th colspan="2">Description</th>
+        <th>Price</th>
+        <th>Size</th>
+        <th>Order Date</th>
+        <th>Action</th>
 
       </tr>
     </thead>
@@ -18,7 +18,7 @@
       <tr>
         
         <td>{{item.name}} </td>
-        <td>{{item.description}}</td>
+        <td colspan="2">{{item.description}}</td>
         <td>{{item.price}}</td>
         <td>{{item.size}}</td>
         <td>{{item.order_date | date }}</td>
@@ -26,11 +26,12 @@
 
       </tr>
     </tbody>
-    <button class="btn btn-primary" *ngIf="!noitem" routerLink="/checkout">Checkout</button>
+    <button class="btn btn-primary" *ngIf="noitem" routerLink="/checkout">Checkout</button>
     <!-- <button class="btn btn-primary" *ngIf="noitem" routerLink="/checkout">No items in your cart!</button> -->
   </table>
-  <div class="alert alert-primary mt-2" *ngIf="noitem" role="alert">
+  <div class="alert alert-primary mt-2" *ngIf="!noitem" role="alert">
     No items in your cart!
+    <button class="btn btn-success ml-5" routerLink="/allproducts">Add to Cart</button>
   </div>
   </div>
   <div class="col-md-4">

@@ -32,5 +32,4 @@ export class AdminhomeComponent implements OnInit {
     const decoded = jwt_decode(token);
     this.adminemail = decoded.email;
   }
-
 }

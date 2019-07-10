@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from '../event.service';
 import jwt_decode from 'jwt-decode';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-cart',
@@ -12,7 +11,7 @@ export class MyCartComponent implements OnInit {
 
   cartItem = [];
   useremail = {};
-  noitem: boolean = true;
+  noitem: boolean = false;
 
   constructor(
     private eventService: EventService,
@@ -27,9 +26,7 @@ export class MyCartComponent implements OnInit {
       .subscribe(
         res => {
           this.cartItem = res
-          if (this.cartItem.length) {
-            this.noItemInCart()
-          }
+          this.noitem = !!this.cartItem.length;
         },
         err => console.log(err)
       );
@@ -44,12 +41,10 @@ export class MyCartComponent implements OnInit {
   removeFromCart(cart_id) {
     this.eventService.removeFromCart(cart_id)
       .subscribe(
-        res => this.getProductsInCart(),
+        res => {
+          this.getProductsInCart();
+        },
         err => console.log(err)
       );
-  }
-
-  noItemInCart() {
-    this.noitem = false;
   }
 }
