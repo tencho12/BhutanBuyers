@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthAdminService } from '../auth-admin.service'
-import jwt_decode from 'jwt-decode'
+import { AuthAdminService } from '../auth-admin.service';
+import jwt_decode from 'jwt-decode';
 
 
 @Component({
@@ -10,8 +10,8 @@ import jwt_decode from 'jwt-decode'
 })
 export class AdminhomeComponent implements OnInit {
 
-  Orders = []
-  adminemail:string
+  Orders = [];
+  adminemail: string;
 
   constructor(private _authAdmin: AuthAdminService) { }
 
@@ -27,12 +27,10 @@ export class AdminhomeComponent implements OnInit {
           this.Orders = res
         },
         err => console.log(err)
-      )
-
+      );
     const token = localStorage.token;
-    const decoded = jwt_decode(token)
-    this.adminemail = decoded.email
-    // console.log(this.userdata)
+    const decoded = jwt_decode(token);
+    this.adminemail = decoded.email;
   }
 
 }

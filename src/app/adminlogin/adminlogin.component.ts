@@ -12,7 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class AdminloginComponent implements OnInit {
 
-  loginAdminData = {}
+  loginAdminData = {};
   myForm: FormGroup;
 
   constructor(
@@ -35,26 +35,23 @@ export class AdminloginComponent implements OnInit {
   }
 
   get email() {
-    return this.myForm.get('email')
+    return this.myForm.get('email');
   }
 
   get password() {
-    return this.myForm.get('password')
+    return this.myForm.get('password');
   }
 
   loginAdmin() {
     this.loginAdminData['email'] = this.myForm.controls.email.value;
     this.loginAdminData['password'] = this.myForm.controls.password.value;
-    //  console.log(this.loginAdminData)
     this.auth.loginAdmin(this.loginAdminData)
       .subscribe(
         res => {
           localStorage.setItem('admintoken', res.token);
-          // this.auth.adminUsername = 'admin username';
           this.router.navigate(['/adminhome']);
         },
         err => console.log(err)
-      )
+      );
   }
-
 }

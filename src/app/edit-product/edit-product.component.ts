@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-product',
@@ -30,13 +30,14 @@ export class EditProductComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //  console.log(this.data.productDetail)
     this.addProductForm();
+    
     if (this.data.productDetail) {
+      debugger;
       this.editProductForm();
     }
-    // console.log(this.data)
   }
+
   addProductForm() {
     this.productForm = this.fb.group({
       product_id:[''],
@@ -66,16 +67,13 @@ export class EditProductComponent implements OnInit {
   }
 
   save() {
-    // console.log(this.productForm.value)
     this.dialogRef.close(this.productForm.value);
-    // console.log(this.productForm)
-    //save the document
   }
 
   cancel() {
     this.dialogRef.close();
     this.productForm.reset();
-    //save the document
+
   }
   
 }

@@ -21,16 +21,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class CheckoutComponent implements OnInit {
 
-  useremail = {}
+  useremail = {};
   checkOutItems = [];
   num: number;
   sum: number = 0;
   product = {};
   success: boolean = false;
   
-  addressForm:FormGroup
+  addressForm: FormGroup;
 
-  userDetail={}
+  userDetail = {};
 
   constructor(
     private _eventService: EventService,
@@ -46,32 +46,30 @@ export class CheckoutComponent implements OnInit {
     });
 
     this.getProductInCart();
-    // debugger;
     
   }
   getProductInCart() {
     const token = localStorage.token;
-    const decoded = jwt_decode(token)
+    const decoded = jwt_decode(token);
     this.useremail['user_email'] = decoded.email;
 
     this._eventService.getProductsInCart(this.useremail)
       .subscribe(
         res => {
           this.checkOutItems = res;
-            this.num = this.checkOutItems.length;
-            this.getTotel();
+          this.num = this.checkOutItems.length;
+          this.getTotel();
         },
         err => console.log(err)
-    )
-    
+      );
   }
 
   get address() {
-    return this.addressForm.get('address')
+    return this.addressForm.get('address');
   }
 
   get dzongkhag() {
-    return this.addressForm.get('dzongkhag')
+    return this.addressForm.get('dzongkhag');
   }
 
   getTotel() {
@@ -80,27 +78,24 @@ export class CheckoutComponent implements OnInit {
       summ = summ + element.price;     
     });
     this.sum = summ;
-    console.log(this.sum)
+    console.log(this.sum);
   }
 
   placeOrder() {
     this.product['item'] = this.checkOutItems;
-    this.product['address']=this.addressForm.value
-    // console.log(this.product)  
+    this.product['address'] = this.addressForm.value;
 
     this._eventService.placeOrder(this.product)
       .subscribe(
         res => {
-          // console.log(res),
-            this.orderSuccess();
+          this.orderSuccess();
         },
         err => console.log(err)
-      )
+      );
   }
 
   orderSuccess() {
     this.success = true;
     setTimeout(() => { this.success = false }, 2000);
   }
-
 }

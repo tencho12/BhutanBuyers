@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthAdminService } from '../auth-admin.service'
-import { EventService } from '../event.service'
-import { Router } from '@angular/router'
-import { FormGroup, FormBuilder, Validators, NgModel} from '@angular/forms'
+import { AuthAdminService } from '../auth-admin.service';
+import { EventService } from '../event.service';
+import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 
@@ -15,15 +15,12 @@ import { EditProductComponent } from '../edit-product/edit-product.component';
 
 })
   
-
 export class ManageProductsComponent implements OnInit {
 
-  products = []
+  products = [];
   productDetail: any;
   selectedFile: File;
   oneProduct:any;
-  // percentDone: number;
-  // uploadSuccess: boolean;
 
   category: any = [
     { id: 1, name: 'clothing' },
@@ -35,12 +32,12 @@ export class ManageProductsComponent implements OnInit {
   size: any = ['small', 'medium', 'large'];
   
   addProductForm: FormGroup;
+
   constructor(
-    private _authAdmin: AuthAdminService,
-    private _eventService: EventService,
-    private _route: Router,
+    private authAdmin: AuthAdminService,
+    private eventService: EventService,
     private fb: FormBuilder,
-    private _router: Router,
+    private router: Router,
     public dialog: MatDialog
 
   ) { }
@@ -62,7 +59,7 @@ export class ManageProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this._eventService.getProducts()
+    this.eventService.getProducts()
       .subscribe(
         res => this.products = res,
         err => console.log(err)
@@ -70,7 +67,7 @@ export class ManageProductsComponent implements OnInit {
   }
 
   addProduct() {
-    this._authAdmin.addProduct(this.addProductForm.value)
+    this.authAdmin.addProduct(this.addProductForm.value)
       .subscribe(
         res => {
           console.log(res)
@@ -79,14 +76,13 @@ export class ManageProductsComponent implements OnInit {
         err => console.log(err)
       );
   }
-
  
   removeproduct(product_id) {
-    this._eventService.removeProduct(product_id)
+    this.eventService.removeProduct(product_id)
       .subscribe(
         res => this.getProducts(),
         err => console.log(err)
-      )
+      );
   }
 
 //material dialog
@@ -101,7 +97,7 @@ export class ManageProductsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.category_id) {
         if (!edit) {
-          this._authAdmin.addProduct(result)
+          this.authAdmin.addProduct(result)
             .subscribe(
               res => {
                 this.getProducts();
@@ -110,19 +106,20 @@ export class ManageProductsComponent implements OnInit {
             );
         }
         else {
-          this._eventService.updateproduct(result)
+          this.eventService.updateproduct(result)
             .subscribe(
               res => this.getProducts(),
               err => console.log(err)
           )
         }
       }
+      this.oneProduct = {};
     });
   }
 
   getProduct(productId) { 
       if (productId) {
-      this._eventService.getProduct(productId)
+      this.eventService.getProduct(productId)
         .subscribe(
           res => {
             this.oneProduct = res;

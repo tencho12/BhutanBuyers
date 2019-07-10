@@ -42,7 +42,6 @@ export class AuthAdminService {
   }
 
   getOrders() {
-    debugger;
     return this.http.get<any>(this.ordersUrl);
   }
   addProduct(data) {

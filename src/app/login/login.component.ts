@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 //my imports
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { AuthService } from "../auth.service";
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  loginUserData = {}
+  loginUserData = {};
   loginForm: FormGroup;
 
   constructor(
@@ -43,11 +43,9 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password')
   }
 
-  
   loginUser() {
     this.loginUserData['email'] = this.loginForm.controls.email.value;
     this.loginUserData['password'] = this.loginForm.controls.password.value;
-    // console.log(this.loginUserData) working
     this._auth.loginUser(this.loginUserData)
       .subscribe(
         res => {
@@ -55,6 +53,6 @@ export class LoginComponent implements OnInit {
           this._router.navigate(['/allproducts'])
         },
         err => console.log(err)
-      )
+      );
   }
 }

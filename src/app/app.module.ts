@@ -46,8 +46,7 @@ import { PlaceOrderComponent } from './place-order/place-order.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MaterialModule    
-
+    MaterialModule,
   ],
   providers: [AuthService, AuthGuard, EventService,
     {

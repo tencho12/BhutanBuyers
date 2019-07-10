@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../event.service'
-import jwt_decode from 'jwt-decode'
-import {Router} from '@angular/router'
+import { EventService } from '../event.service';
+import jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-cart',
@@ -14,8 +14,8 @@ export class MyCartComponent implements OnInit {
   useremail = {};
   noitem: boolean = true;
 
-  constructor(private _eventService: EventService,
-    private _route:Router
+  constructor(
+    private eventService: EventService,
   ) { }
 
   ngOnInit() {
@@ -23,7 +23,7 @@ export class MyCartComponent implements OnInit {
     this.getProductsInCart();
   }
   getProductsInCart() {
-    this._eventService.getProductsInCart(this.useremail)
+    this.eventService.getProductsInCart(this.useremail)
       .subscribe(
         res => {
           this.cartItem = res
@@ -32,26 +32,24 @@ export class MyCartComponent implements OnInit {
           }
         },
         err => console.log(err)
-      )
+      );
   }
+
   decodeToken() {
     const token = localStorage.token;
-    const decoded = jwt_decode(token)
-    this.useremail['user_email'] = decoded.email
+    const decoded = jwt_decode(token);
+    this.useremail['user_email'] = decoded.email;
   }
+
   removeFromCart(cart_id) {
-    this._eventService.removeFromCart(cart_id)
+    this.eventService.removeFromCart(cart_id)
       .subscribe(
         res => this.getProductsInCart(),
         err => console.log(err)
-      )
+      );
   }
 
   noItemInCart() {
     this.noitem = false;
-    // setTimeout(() => {
-    //   this.noitem = false;
-    // });
   }
-
 }
